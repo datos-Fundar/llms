@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from fundar_llms import Base64, Context
 from fundar_llms.utils import DataclassDictUtilsMixin
 
-response_dataclass = dataclass(
+response_dataclass_options = dict(
     init            = True,
     repr            = True,
     eq              = True,
@@ -16,7 +16,7 @@ response_dataclass = dataclass(
     weakref_slot    = False,
 )
 
-@response_dataclass
+@dataclass(**response_dataclass_options)
 class BaseResponse(DataclassDictUtilsMixin):
     model: str
     prompt: str

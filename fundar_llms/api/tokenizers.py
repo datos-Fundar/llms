@@ -2,7 +2,7 @@ from fundar_llms.utils import modelname
 from dataclasses import dataclass
 from typing import Optional
 
-tokenizer_model_dataclass = dataclass(
+tokenizer_model_dataclass_options = dict(
     init            = True,
     repr            = True,
     eq              = True,
@@ -17,7 +17,7 @@ tokenizer_model_dataclass = dataclass(
 
 auto_tokenizer_ = None
 
-@tokenizer_model_dataclass
+@dataclass(**tokenizer_model_dataclass_options)
 class TokenizerModel:
     name: str
     needs_auth: bool = True
