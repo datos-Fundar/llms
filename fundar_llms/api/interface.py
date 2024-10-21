@@ -1,9 +1,6 @@
 from typing import Protocol, Optional, Any
 from dataclasses import dataclass
-
-# TODO: Mover esto a otro modulo de tipos que esté más arriba.
-class Base64(str): ...
-class Context(Any): ...
+from fundar_llms import Base64, Context
 
 response_dataclass = dataclass(
     init            = True,
@@ -25,10 +22,16 @@ class BaseResponse:
     system: str
     response: str
     total_duration: int
-    load_duration: Optional[int]
-    done: Optional[bool]
-    done_reason: Optional[str]
-    context: Optional[Context]
+    load_duration: Optional[int] = None
+    done: Optional[bool] = None
+    done_reason: Optional[str] = None
+    context: Optional[Context] = None
+    num_ctx: Optional[int] = None
+    num_predict: Optional[int] = None
+    temperature: Optional[float] = None
+    top_k: Optional[float] = None
+    top_p: Optional[float] = None
+    extra: Optional[Any] = None
 
 
 class PlainPromptInterface(Protocol):
