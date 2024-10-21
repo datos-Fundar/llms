@@ -1,6 +1,7 @@
 from typing import Protocol, Optional, Any
 from dataclasses import dataclass
 from fundar_llms import Base64, Context
+from fundar_llms.utils import DataclassDictUtilsMixin
 
 response_dataclass = dataclass(
     init            = True,
@@ -16,7 +17,7 @@ response_dataclass = dataclass(
 )
 
 @response_dataclass
-class BaseResponse:
+class BaseResponse(DataclassDictUtilsMixin):
     model: str
     prompt: str
     system: str
