@@ -54,6 +54,6 @@ class PlainPromptInterface(Protocol):
             top_p: Optional[float] = None,
             *args,
             **kwargs
-    ) -> Any: ...
+    ) -> BaseResponse: ...
 
 

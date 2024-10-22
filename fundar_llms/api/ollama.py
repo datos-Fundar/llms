@@ -2,6 +2,24 @@ from ollama import Client as _OllamaClient # type: ignore
 from fundar_llms.api.interface import PlainPromptInterface, Base64
 from fundar_llms.cuda import get_available_vram
 from typing import Optional, Any
+from fundar_llms.api.interface import BaseResponse, response_dataclass_options
+from dataclasses import dataclass
+
+def dict_dif(a, b):
+    dif = set(a.keys()) - set(b.keys())
+    
+    result = {k: a[k] for k in dif if k in a}
+    result.update({k: b[k] for k in dif if k in b})
+    
+    return result
+
+@dataclass(**response_dataclass_options)
+class OllamaResponse(BaseResponse):
+    created_at: str                 # type: ignore
+    prompt_eval_count: int          # type: ignore
+    prompt_eval_duration: int       # type: ignore
+    eval_count: int                 # type: ignore
+    eval_duration: int              # type: ignore
 
 OLLAMA_DEFAULT_OPTIONS = dict(
     mirostat=0,           # int
@@ -18,7 +36,7 @@ OLLAMA_DEFAULT_OPTIONS = dict(
     top_k=40,             # int
     top_p=0.9,            # float
     min_p=0.0             # float
-)
+)    
 
 class OllamaClient(PlainPromptInterface, _OllamaClient):
     def list_models(self, max_vram = None): # default max vram: (3.2 * 1.074E9)
@@ -66,7 +84,7 @@ class OllamaClient(PlainPromptInterface, _OllamaClient):
 
         options = OLLAMA_DEFAULT_OPTIONS | options # type: ignore
 
-        return _OllamaClient.generate( # type: ignore
+        model_response = _OllamaClient.generate( # type: ignore
             self,
             model=model,
             prompt=prompt,
@@ -80,3 +98,20 @@ class OllamaClient(PlainPromptInterface, _OllamaClient):
             options=options,
             **kwargs
         )
+        
+        adapter = dict(
+            **model_response,
+            prompt = prompt,
+            system = system or '',
+            temperature = temperature,
+            top_k = top_k,
+            top_p = top_p,
+            num_ctx = num_ctx,
+            num_predict = num_predict,
+        )
+
+        extra = dict(options = dict_dif(options, adapter))
+
+        adapter['extra'] = extra
+
+        return OllamaResponse.from_dict(adapter)
