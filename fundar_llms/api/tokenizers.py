@@ -1,4 +1,4 @@
-from fundar_llms.utils import modelname
+from fundar_llms.utils.models import modelname
 from dataclasses import dataclass
 from typing import Optional
 

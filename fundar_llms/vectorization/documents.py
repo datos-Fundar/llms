@@ -6,9 +6,9 @@ from typing import Optional
 from functools import reduce
 from operator import or_ as union
 from typing import TypeVar, Callable
-from .uuid import UuidGenerator
-from .common import allow_opaque_constructor
-from .cuda import is_cuda_available
+from fundar_llms.utils.uuid import UuidGenerator
+from fundar_llms.utils.common import allow_opaque_constructor
+from ..cuda import is_cuda_available
 import inspect
 
 

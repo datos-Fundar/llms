@@ -1,6 +1,6 @@
-from ollama import Client as _OllamaClient
+from ollama import Client as _OllamaClient # type: ignore
 from fundar_llms.api.interface import PlainPromptInterface, Base64
-from fundar_llms.utils import get_available_vram
+from fundar_llms.cuda import get_available_vram
 from typing import Optional, Any
 
 OLLAMA_DEFAULT_OPTIONS = dict(
