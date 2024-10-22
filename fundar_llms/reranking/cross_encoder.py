@@ -19,8 +19,9 @@ def upsert_reranker_model(
         _reranker = CrossEncoder(model_name=model_name, **kwargs)
     else:
         if (_reranker.model.name_or_path != model_name) or (_reranker.model.device.type != device):
+            crossencoder_t = type(_reranker)
             del _reranker
-            _reranker = CrossEncoder(model_name=model_name, **kwargs)
+            _reranker = crossencoder_t(model_name=model_name, **kwargs)
     return _reranker
 
 
