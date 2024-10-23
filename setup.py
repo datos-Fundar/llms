@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages # type: ignore
 
 setup(
-    version = '1.0.7',
+    version = '1.0.8',
     name='fundar_llms',
     author='Fundar',
     description="LLM utilities created for Fundar's dev projects.",

@@ -28,7 +28,7 @@ class BaseResponse(DataclassDictUtilsMixin):
 
 
 class PlainPromptInterface(Protocol):
-    def generate(self, model: str, prompt: str, raw: Optional[bool] = ..., image: Optional[Base64] = ..., suffix: Optional[str] = ..., format: Optional[str] = ..., system: Optional[str] = ..., context: Optional[Context] = ..., stream: Optional[bool] = ..., num_ctx: Optional[int] = ..., num_predict: Optional[int] = ..., temperature: Optional[float] = ..., top_k: Optional[int] = ..., top_p: Optional[float] = ..., *args, **kwargs) -> Any:
+    def generate(self, model: str, prompt: str, raw: Optional[bool] = ..., image: Optional[Base64] = ..., suffix: Optional[str] = ..., format: Optional[str] = ..., system: Optional[str] = ..., context: Optional[Context] = ..., stream: Optional[bool] = ..., num_ctx: Optional[int] = ..., num_predict: Optional[int] = ..., temperature: Optional[float] = ..., top_k: Optional[int] = ..., top_p: Optional[float] = ..., *args, **kwargs) -> BaseResponse:
         ...
     
 

@@ -10,7 +10,7 @@ class DataclassDictUtilsMixin(AbstractBaseClass):
     def from_dict(cls, data: dict[str, Any]): # -> Self:
         ...
     
-    def to_dict(self, compact=...) -> dict[str, Any]:
+    def to_dict(self, exclude=..., compact=...) -> dict[str, Any]:
         ...
     
 
