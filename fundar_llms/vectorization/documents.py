@@ -131,7 +131,12 @@ def encode_with_multiprocessing(transformer, pool):
         return result
     return _
 
-@allow_opaque_constructor(sentence_transformer = SentenceTransformer)
+_vectorize_document_opaque_constructor_options_ = dict(
+    sentence_transformer = SentenceTransformer,
+    uid = UuidGenerator,
+)
+
+@allow_opaque_constructor(**_vectorize_document_opaque_constructor_options_)
 def vectorize_document(
         x: str | Document | Iterable[Document | str], 
         sentence_transformer = None,
