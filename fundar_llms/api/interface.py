@@ -1,4 +1,4 @@
-from typing import Protocol, Optional, Any
+from typing import Dict, List, Protocol, Optional, Any, TypedDict
 from dataclasses import dataclass
 from fundar_llms import Base64, Context
 from fundar_llms.utils import DataclassDictUtilsMixin
@@ -56,4 +56,19 @@ class PlainPromptInterface(Protocol):
             **kwargs
     ) -> BaseResponse: ...
 
-
+class LlmArgs(TypedDict):
+    prompt      : Optional[str]            = None
+    raw         : Optional[bool]           = None
+    image       : Optional[Base64]         = None
+    suffix      : Optional[str]            = None
+    format      : Optional[str]            = None
+    system      : Optional[str]            = None
+    context     : Optional[Context]        = None
+    stream      : Optional[bool]           = None
+    num_ctx     : Optional[int]            = None
+    num_predict : Optional[int]            = None
+    temperature : Optional[float]          = None
+    top_k       : Optional[int]            = None
+    top_p       : Optional[float]          = None
+    args        : Optional[List[Any]]      = None
+    kwargs      : Optional[Dict[str, Any]] = None
